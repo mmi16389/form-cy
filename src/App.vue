@@ -29,20 +29,21 @@
     </v-app-bar>
 
     <v-main>
-      <HelloWorld/>
+      <Form/>
     </v-main>
+
   </v-app>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import HelloWorld from './components/HelloWorld.vue'
+import Form from './components/Form.vue'
 
 export default Vue.extend({
   name: 'App',
 
   components: {
-    HelloWorld
+    Form
   },
 
   data: () => ({

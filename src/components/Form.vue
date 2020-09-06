@@ -2,6 +2,7 @@
   <v-container>
     <v-row class="text-center">
       <v-col cols="12">
+
  <v-form
       ref="form"
       v-model="valid"
@@ -68,42 +69,51 @@
 </template>
 
 <script lang="ts">
+import { VForm } from '@/types'
 import Vue from 'vue'
+import { Component, Ref } from 'vue-property-decorator'
 
-export default Vue.extend({
-  name: 'HelloWorld',
-  data: () => ({
-    valid: true,
-    name: '',
-    nameRules: [
-      v => !!v || 'Name is required',
-      v => (v && v.length <= 10) || 'Name must be less than 10 characters'
-    ],
-    email: '',
-    emailRules: [
-      v => !!v || 'E-mail is required',
-      v => /.+@.+\..+/.test(v) || 'E-mail must be valid'
-    ],
-    select: null,
-    items: [
+@Component
+export default class Form extends Vue {
+    @Ref('form') readonly form!: VForm;
+
+    valid = true;
+
+    name = '';
+
+    nameRules = [
+      (v: any) => !!v || 'Name is required',
+      (v: any) => (v && v.length <= 10) || 'Name must be less than 10 characters'
+    ];
+
+    email= '';
+
+    emailRules= [
+      (v: any) => !!v || 'E-mail is required',
+      (v: any) => /.+@.+\..+/.test(v) || 'E-mail must be valid'
+    ];
+
+    select= null;
+
+    items= [
       'Item 1',
       'Item 2',
       'Item 3',
       'Item 4'
-    ],
-    checkbox: false
-  }),
+    ];
 
-  methods: {
+    checkbox= false;
+
     validate () {
-      this.$refs.form.validate()
-    },
-    reset () {
-      this.$refs.form.reset()
-    },
-    resetValidation () {
-      this.$refs.form.resetValidation()
+      this.form.validate()
     }
-  }
-})
+
+    reset () {
+      this.form.reset()
+    }
+
+    resetValidation () {
+      this.form.resetValidation()
+    }
+}
 </script>
